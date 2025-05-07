@@ -1,0 +1,27 @@
+apiVersion: jfrog.kubesource.toolbox/v1alpha1
+kind: Xray
+metadata:
+  name: jfrog-xray-ondemand-scan
+  labels:
+    jfrog.kubesource.toolbox: jfrog-xray-ondemand-scan
+spec:
+  # ttlSecondsTerminated: 200
+  ttlSecondsTerminated: 20
+  template:
+    spec:
+      containers:
+      - name: hello-1
+        image: busybox:1.28
+        imagePullPolicy: IfNotPresent
+        command:
+        - /bin/sh
+        - -c
+        - date; echo Hello from the Kubernetes cluster
+      - name: hello-2
+        image: busybox:1.28
+        imagePullPolicy: IfNotPresent
+        command:
+        - /bin/sh
+        - -c
+        - date; echo Hello from the Kubernetes cluster
+      restartPolicy: OnFailure
